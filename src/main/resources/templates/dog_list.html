@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    th, td {
+      text-align: center;
+      padding: 12px 15px;
+    }
+    table {
+      width: 80%;  /* Set table width */
+      margin: 0 auto; /* Center table horizontally */
+    }
+    .table thead th {
+      background-color: #f8f9fa;  /* Table header background color */
+    }
+    img {
+      border-radius: 8px;  /* Rounded corners for images */
+      width: 150px; /* Image size */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<!-- Include Navigation Bar Fragment -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+<div class="container mt-5">
+  <h1>Dog List</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Breed</th>
+      <th>Age</th>
+      <th>Shelter ID</th>
+      <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dog : ${dogs}">
+      <td th:text="${dog.name}"></td>
+      <td th:text="${dog.breed}"></td>
+      <td th:text="${dog.age}"></td>
+      <td th:text="${dog.shelter.id}"></td>
+      <td>
+        <img th:src="@{${dog.imageUrl}}" alt="Dog Image" style="width: 100px;">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

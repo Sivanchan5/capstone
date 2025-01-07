@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog List</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Include Navigation Bar Fragment -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<div class="container mt-5">
+
+    <!-- Success Message -->
+    <div th:if="${param.success}">
+        <div class="alert alert-success">
+            Adoption request submitted successfully!
+        </div>
+    </div>
+    <!-- Error Message -->
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            Failed to submit adoption request. Please try again.
+        </div>
+    </div>
+    <h1>Dog List</h1>
+    <!-- Search Form -->
+    <form th:action="@{/dogs/search}" method="get" class="mb-3">
+        <input type="text" name="breed" placeholder="Search by breed" class="form-control mb-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Add Dog Button -->
+    <!-- Modified to Trigger Modal -->
+    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#dogModal">Add New Dog</button>
+
+    <!-- Dog List -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Shelter Id</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dog : ${dogs}">
+            <td th:text="${dog.name}"></td>
+            <td th:text="${dog.breed}"></td>
+            <td th:text="${dog.age}"></td>
+            <td th:text="${dog.shelter.id}"></td>
+            <td>
+                <img th:src="@{${dog.imageUrl}}" alt="Dog Image" style="width: 100px;">
+            </td>
+            <td>
+                <!-- Fill the Form -->
+                <button class="btn btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#dogModal"
+                        th:attr="data-id=${dog.id}, data-name=${dog.name}, data-breed=${dog.breed}, data-age=${dog.age}, data-shelter=${dog.shelter.id}">
+                    Edit
+                </button>
+                <!-- Delete Button -->
+                <a th:href="@{/dogs/delete/{id}(id=${dog.id})}" class="btn btn-danger"
+                   onclick="return confirm('Are you sure you want to delete this dog?')">Delete</a>
+
+                <!-- Adopt Button -->
+                <form th:action="@{/adoptions/apply}" method="post" class="d-inline">
+                    <input type="hidden" name="dogId" th:value="${dog.id}">
+                    <button type="submit" class="btn btn-primary">Adopt</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal for Add/Edit Dog -->
+<div class="modal fade" id="dogModal" tabindex="-1" aria-labelledby="dogModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dogModalLabel">Dog Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dogForm" th:action="@{/dogs/add}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="dogId">
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="breed" class="form-label">Breed</label>
+                        <input type="text" id="breed" name="breed" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" id="age" name="age" class="form-control" required>
+                    </div>
+
+                    <!-- Shelter Selection Box -->
+                    <div class="mb-3">
+                        <label for="shelterId" class="form-label">Shelter ID</label>
+                        <input type="number" id="shelterId" name="shelterId" class="form-control" required
+                               th:value="${dog != null and dog.shelter != null ? dog.shelter.id : 1}">
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload Image</label>
+                        <input type="file" id="file" name="file" class="form-control" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS File -->
+<script src="/js/dog.js"></script>
+</body>
+</html>
