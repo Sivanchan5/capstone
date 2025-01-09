@@ -1,4 +1,4 @@
-package com.example.capstone;
+package com.example.capstone.config;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

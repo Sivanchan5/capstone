@@ -1,6 +1,5 @@
-package com.example.capstone;
+package com.example.capstone.controller;
 
-import com.example.capstone.controller.UserController;
 import com.example.capstone.model.User;
 import com.example.capstone.service.UserService;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.example.capstone;
+package com.example.capstone.service;
 import com.example.capstone.model.Adoption;
 import com.example.capstone.model.AdoptionStatus;
 import com.example.capstone.model.Dog;
@@ -6,7 +6,6 @@ import com.example.capstone.model.User;
 import com.example.capstone.repository.AdoptionRepository;
 import com.example.capstone.repository.DogRepository;
 import com.example.capstone.repository.UserRepository;
-import com.example.capstone.service.AdoptionService;
 import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

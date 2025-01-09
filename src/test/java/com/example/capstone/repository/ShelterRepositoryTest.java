@@ -1,6 +1,5 @@
-package com.example.capstone;
+package com.example.capstone.repository;
 import com.example.capstone.model.Shelter;
-import com.example.capstone.repository.ShelterRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

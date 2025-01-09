@@ -1,7 +1,6 @@
-package com.example.capstone;
+package com.example.capstone.service;
 import com.example.capstone.model.Shelter;
 import com.example.capstone.repository.ShelterRepository;
-import com.example.capstone.service.ShelterService;
 import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

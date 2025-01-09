@@ -1,11 +1,10 @@
-package com.example.capstone;
+package com.example.capstone.service;
 import com.example.capstone.dto.LoginRequest;
 import com.example.capstone.dto.RegisterRequest;
 import com.example.capstone.dto.UserDto;
 import com.example.capstone.model.Role;
 import com.example.capstone.model.User;
 import com.example.capstone.repository.UserRepository;
-import com.example.capstone.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

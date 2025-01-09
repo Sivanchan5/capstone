@@ -1,11 +1,8 @@
-package com.example.capstone;
+package com.example.capstone.repository;
 import com.example.capstone.model.Adoption;
 import com.example.capstone.model.AdoptionStatus;
 import com.example.capstone.model.Dog;
 import com.example.capstone.model.User;
-import com.example.capstone.repository.AdoptionRepository;
-import com.example.capstone.repository.DogRepository;
-import com.example.capstone.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
